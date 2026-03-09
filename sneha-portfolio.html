@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sneha Chakrabarty — ECE Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --bg2: #0e1118;
+    --gold: #f5c842;
+    --gold-dim: #c49a1e;
+    --teal: #3dffd0;
+    --teal-dim: #1a8a6e;
+    --pink: #ff6b9d;
+    --text: #e8e4d8;
+    --text-dim: #8a8478;
+    --card: #131720;
+    --border: rgba(245,200,66,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Serif Display', serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.18s ease, width 0.2s, height 0.2s;
+    opacity: 0.5;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10,12,16,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* Hero */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated SVG background */
+  .bg-circuit {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+  }
+
+  .honeycomb-bg {
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 55vw;
+    height: 120vh;
+    pointer-events: none;
+    opacity: 0.04;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 30px; height: 1px;
+    background: var(--teal);
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  h1 span {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.45em;
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.02em;
+    margin-top: 0.3rem;
+  }
+
+  .hero-desc {
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: none;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    border: 1.5px solid var(--gold);
+  }
+  .btn-primary:hover { background: transparent; color: var(--gold); }
+  .btn-outline {
+    background: transparent;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal); color: var(--bg); }
+
+  /* Floating badges */
+  .float-badges {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 2;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+  .badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.8rem 1.2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .badge:hover { border-color: var(--gold); color: var(--gold); }
+  .badge .b-icon {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Sections */
+  section {
+    padding: 7rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 3.5rem;
+  }
+  .section-title em { color: var(--teal); font-style: italic; }
+
+  /* About */
+  #about {
+    background: var(--bg2);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+  .about-text p + p { margin-top: 1.2rem; }
+  .about-text strong { color: var(--text); }
+
+  .fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .fact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.1rem 1.3rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: border-color 0.2s;
+  }
+  .fact-item:hover { border-color: var(--teal); }
+  .fact-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .fact-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.2rem;
+  }
+  .fact-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  /* Skills */
+  #skills { background: var(--bg); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+  .skill-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .skill-card:hover::before { transform: scaleY(1); }
+  .skill-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+  .skill-list {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 2;
+  }
+  .skill-list span {
+    display: inline-block;
+    margin-right: 0.4rem;
+    color: var(--text);
+  }
+
+  /* Experience */
+  #experience { background: var(--bg2); }
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--teal), transparent);
+    opacity: 0.3;
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 3.5rem;
+    padding-left: 2rem;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -2.9rem;
+    top: 0.3rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px var(--gold);
+  }
+  .tl-item:nth-child(2) .tl-dot { background: var(--teal); box-shadow: 0 0 12px var(--teal); }
+  .tl-item:nth-child(3) .tl-dot { background: var(--pink); box-shadow: 0 0 12px var(--pink); }
+  .tl-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .tl-role {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+  }
+  .tl-org {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .tl-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tl-points li {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .tl-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-size: 0.75rem;
+  }
+
+  /* Projects */
+  #projects { background: var(--bg); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+  }
+  .proj-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--teal));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+  .proj-card:hover { border-color: rgba(61,255,208,0.3); transform: translateY(-5px); }
+  .proj-card:hover::after { transform: scaleX(1); }
+  .proj-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .proj-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .proj-title { font-size: 1.3rem; margin-bottom: 0.8rem; }
+  .proj-desc {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .proj-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+  }
+  .tech-chip {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.2);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .proj-card:nth-child(1) { grid-column: span 2; }
+  .proj-card:nth-child(1) .proj-desc { max-width: 65%; }
+
+  /* Fun facts strip */
+  .marquee-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    padding: 0.8rem 0;
+  }
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee span {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--bg);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .marquee-sep { color: var(--bg2); opacity: 0.4; }
+
+  /* Contact */
+  #contact {
+    background: var(--bg2);
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .contact-desc {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Footer */
+  footer {
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px var(--gold); }
+    50% { box-shadow: 0 0 25px var(--gold), 0 0 50px rgba(245,200,66,0.3); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Decorative circuit dots */
+  .circuit-dots {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* GPA callout */
+  .stat-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2.5rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 0.3rem;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .proj-card:nth-child(1) { grid-column: span 1; }
+    .proj-card:nth-child(1) .proj-desc { max-width: 100%; }
+    .float-badges { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero" class="nav-logo">SC_</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <!-- Animated circuit background -->
+  <svg class="bg-circuit" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#f5c842" stroke-width="1" fill="none">
+      <path d="M0 200 H100 V300 H300 V200 H500"/>
+      <path d="M600 0 V150 H750 V100 H900 V200 H1200"/>
+      <path d="M0 500 H200 V600 H100 V700 H400 V500 H600"/>
+      <path d="M800 300 H950 V400 H1100 V300"/>
+      <path d="M300 700 H500 V650 H700 V800"/>
+      <circle cx="100" cy="200" r="4" fill="#f5c842"/>
+      <circle cx="300" cy="200" r="4" fill="#f5c842"/>
+      <circle cx="750" cy="150" r="4" fill="#3dffd0"/>
+      <circle cx="900" cy="200" r="4" fill="#3dffd0"/>
+      <circle cx="200" cy="600" r="4" fill="#f5c842"/>
+      <circle cx="700" cy="650" r="4" fill="#3dffd0"/>
+      <circle cx="950" cy="400" r="4" fill="#3dffd0"/>
+    </g>
+    <g stroke="#3dffd0" stroke-width="0.7" fill="none" opacity="0.5">
+      <path d="M50 100 H200 V50 H400"/>
+      <path d="M900 500 H1050 V600 H1150 V550"/>
+      <path d="M400 750 H550 V700 H650"/>
+    </g>
+  </svg>
+
+  <!-- Honeycomb SVG decoration -->
+  <svg class="honeycomb-bg" viewBox="0 0 500 800" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#f5c842" stroke-width="1">
+      <polygon points="80,40 120,40 140,74 120,108 80,108 60,74"/>
+      <polygon points="140,74 180,74 200,108 180,142 140,142 120,108"/>
+      <polygon points="80,108 120,108 140,142 120,176 80,176 60,142"/>
+      <polygon points="200,40 240,40 260,74 240,108 200,108 180,74"/>
+      <polygon points="260,74 300,74 320,108 300,142 260,142 240,108"/>
+      <polygon points="200,108 240,108 260,142 240,176 200,176 180,142"/>
+      <polygon points="320,40 360,40 380,74 360,108 320,108 300,74"/>
+      <polygon points="140,142 180,142 200,176 180,210 140,210 120,176"/>
+      <polygon points="260,142 300,142 320,176 300,210 260,210 240,176"/>
+      <polygon points="80,176 120,176 140,210 120,244 80,244 60,210"/>
+      <polygon points="200,176 240,176 260,210 240,244 200,244 180,210"/>
+      <polygon points="320,176 360,176 380,210 360,244 320,244 300,210"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-tag">ECE Engineer & Researcher</div>
+    <h1>
+      Sneha
+      <em>Chakrabarty</em>
+      <span>Building at the intersection of hardware & software</span>
+    </h1>
+    <p class="hero-desc">
+      Electrical & Computer Engineering student at Northeastern University.
+      I design circuits, write embedded code, build robots, and occasionally 
+      keep bees. Currently: wearable robotics research + NASA rover competition.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="float-badges">
+    <div class="badge" style="animation: float 4s 0s ease-in-out infinite">
+      <span class="b-icon">🛸</span>
+      NASA Lunabotics
+    </div>
+    <div class="badge" style="animation: float 4s 0.8s ease-in-out infinite">
+      <span class="b-icon">🍯</span>
+      NU Beekeeper
+    </div>
+    <div class="badge" style="animation: float 4s 1.6s ease-in-out infinite">
+      <span class="b-icon">🤖</span>
+      Robotics Researcher
+    </div>
+    <div class="badge" style="animation: float 4s 2.4s ease-in-out infinite">
+      <span class="b-icon">💚</span>
+      Google Alum
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>ECG Signal Processing</span><span class="marquee-sep">✦</span>
+    <span>Wearable Robotics</span><span class="marquee-sep">✦</span>
+    <span>FPGA Design</span><span class="marquee-sep">✦</span>
+    <span>ROS2</span><span class="marquee-sep">✦</span>
+    <span>NASA Lunabotics</span><span class="marquee-sep">✦</span>
+    <span>Google SWE Intern</span><span class="marquee-sep">✦</span>
+    <span>Pneumatic Actuation</span><span class="marquee-sep">✦</span>
+    <span>Kalman Filtering</span><span class="marquee-sep">✦</span>
+    <span>KiCAD</span><span class="marquee-sep">✦</span>
+    <span>NU Beekeeping Society</span><span class="marquee-sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>ECG Signal Processing</span><span class="marquee-sep">✦</span>
+    <span>Wearable Robotics</span><span class="marquee-sep">✦</span>
+    <span>FPGA Design</span><span class="marquee-sep">✦</span>
+    <span>ROS2</span><span class="marquee-sep">✦</span>
+    <span>NASA Lunabotics</span><span class="marquee-sep">✦</span>
+    <span>Google SWE Intern</span><span class="marquee-sep">✦</span>
+    <span>Pneumatic Actuation</span><span class="marquee-sep">✦</span>
+    <span>Kalman Filtering</span><span class="marquee-sep">✦</span>
+    <span>KiCAD</span><span class="marquee-sep">✦</span>
+    <span>NU Beekeeping Society</span><span class="marquee-sep">✦</span>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="section-label">01 — About me</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title reveal">A little bit of <em>everything</em></h2>
+      <div class="about-text reveal">
+        <p>
+          Hi! I'm Sneha — a third-year ECE student at Northeastern University who gets equally excited 
+          about soldering an instrumentation amplifier and deploying Kotlin code on Android hardware.
+        </p>
+        <p>
+          My work lives at the edge where <strong>hardware meets software</strong>: designing CAN bus 
+          circuitry for a lunar rover one day, building Android features at Google the next.
+          I love making things that are physically real — systems you can hold, wear, or watch excavate 
+          simulated moon regolith.
+        </p>
+        <p>
+          When I'm not in the lab, you might find me at the <strong>NU Beekeeping Society</strong>, 
+          running SWE events, or teaching kids to code robots at a summer camp. I believe in making 
+          engineering joyful and accessible.
+        </p>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat-item">
+          <span class="stat-num">3.54</span>
+          <span class="stat-lbl">GPA</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-lbl">Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3</span>
+          <span class="stat-lbl">Subteams @ NASA Lunabotics</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">200+</span>
+          <span class="stat-lbl">Page Design Report</span>
+        </div>
+      </div>
+    </div>
+    <div class="fact-list reveal">
+      <div class="fact-item">
+        <span class="fact-icon">🎓</span>
+        <div>
+          <div class="fact-label">Education</div>
+          <div class="fact-val">B.S. ECE + CS Minor<br>Northeastern University, May 2027</div>
+        </div>
+      </div>
+      <div class="fact-item">
+        <span class="fact-icon">📍</span>
+        <div>
+          <div class="fact-label">Location</div>
+          <div class="fact-val">Lathrop, CA (hometown)<br>Boston, MA (school)</div>
+        </div>
+      </div>
+      <div class="fact-item">
+        <span class="fact-icon">💼</span>
+        <div>
+          <div class="fact-label">Recent Internship</div>
+          <div class="fact-val">Software Engineer Intern @ Google<br>Android Photos, Summer 2025</div>
+        </div>
+      </div>
+      <div class="fact-item">
+        <span class="fact-icon">🔬</span>
+        <div>
+          <div class="fact-label">Current Research</div>
+          <div class="fact-val">PARSES Lab — Wearable Pneumatic<br>Robotic Splint on ESP32-S2</div>
+        </div>
+      </div>
+      <div class="fact-item">
+        <span class="fact-icon">🐝</span>
+        <div>
+          <div class="fact-label">Fun Fact</div>
+          <div class="fact-val">Member of the NU Beekeeping Society<br>— yes, actual bees 🍯</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title reveal">What I work <em>with</em></h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <span class="skill-icon">🔌</span>
+      <div class="skill-cat">Hardware & Design</div>
+      <div class="skill-list">
+        <span>KiCAD</span> <span>PSpice</span> <span>LTSpice</span>
+        <span>Xilinx Vivado</span> <span>AutoCAD</span> <span>SolidWorks</span>
+        <span>Arduino</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">💻</span>
+      <div class="skill-cat">Embedded & Software</div>
+      <div class="skill-list">
+        <span>C / C++</span> <span>Python</span> <span>MATLAB</span>
+        <span>Java</span> <span>Kotlin</span> <span>SystemVerilog</span>
+        <span>ROS2</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🔭</span>
+      <div class="skill-cat">Lab Equipment</div>
+      <div class="skill-list">
+        <span>Oscilloscopes</span> <span>Multimeters</span>
+        <span>Power Supplies</span> <span>Function Generators</span>
+        <span>NI DAQ</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🧠</span>
+      <div class="skill-cat">Specializations</div>
+      <div class="skill-list">
+        <span>Embedded Systems</span> <span>Signal Processing</span>
+        <span>FPGA Design</span> <span>Sensor Fusion</span>
+        <span>Kalman Filtering</span> <span>I²C / SPI / CAN</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🚀</span>
+      <div class="skill-cat">Platforms</div>
+      <div class="skill-list">
+        <span>ESP32-S2</span> <span>STM32</span> <span>DE1-SoC FPGA</span>
+        <span>Cyclone V</span> <span>Android (AOSP)</span>
+        <span>Raspberry Pi</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🤝</span>
+      <div class="skill-cat">Soft Skills</div>
+      <div class="skill-list">
+        <span>Cross-functional Collaboration</span>
+        <span>Technical Documentation</span>
+        <span>Curriculum Design</span>
+        <span>Teaching & Mentorship</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-label">03 — Experience</div>
+  <h2 class="section-title reveal">Where I've <em>been</em></h2>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Aug 2025 — Present</div>
+      <div class="tl-role">Undergraduate Research Assistant</div>
+      <div class="tl-org">PARSES Lab · Northeastern University · Boston, MA</div>
+      <ul class="tl-points">
+        <li>Developing a battery-powered wearable pneumatic robotic splint on ESP32-S2, meeting strict power-efficiency, safety, and sensing constraints.</li>
+        <li>Architecting GPIO-interrupt-based sleep/wake cycles in C++ to minimize idle power consumption.</li>
+        <li>Integrating multiple 9-DoF IMUs over I²C with an Unscented Kalman Filter for accurate joint angle estimation.</li>
+        <li>Designing a three-state closed-loop pneumatic actuation system using an MPRLS pressure sensor, MOSFET drivers, air pump, and solenoid valve.</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 2025 — Aug 2025</div>
+      <div class="tl-role">Software Engineer Intern</div>
+      <div class="tl-org">Google · Mountain View, CA</div>
+      <ul class="tl-points">
+        <li>Owned end-to-end feature development on an Android Photos storage management project, from system design through launch.</li>
+        <li>Implemented core selection logic, eligibility handling, and real-time logging in Kotlin/Java; built confirmation dialogs, undo flows, and entry points.</li>
+        <li>Wrote technical design documentation and presented feature to engineering managers at project close.</li>
+        <li>Feature was approved for production rollout following cross-functional design review.</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 2024 — Aug 2024</div>
+      <div class="tl-role">STEM Instructor</div>
+      <div class="tl-org">iD Tech Camps · Berkeley, CA</div>
+      <ul class="tl-points">
+        <li>Taught VEX Robotics, C++, Java, and Virtual Robotics to students ages 7–17, tailoring instruction across skill levels.</li>
+        <li>Designed interactive curricula and facilitated hands-on labs in programming and robotics.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-label">04 — Projects</div>
+  <h2 class="section-title reveal">Things I've <em>built</em></h2>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal">
+      <span class="proj-emoji">🌕</span>
+      <div class="proj-tag">NASA Competition · Sept 2025 – Present</div>
+      <div class="proj-title">Lunar Excavation Robot</div>
+      <p class="proj-desc">
+        Contributing across electrical, software, and systems subteams for NU SEDS Lunabotics.
+        Designing CAN bus interface circuitry for STM32 control boards in KiCAD, building a motor 
+        power monitoring board, and implementing ROS2 control nodes for excavation and deposition 
+        subsystems on a rover for simulated lunar regolith operations.
+      </p>
+      <div class="proj-tech">
+        <span class="tech-chip">KiCAD</span>
+        <span class="tech-chip">CAN Bus</span>
+        <span class="tech-chip">STM32</span>
+        <span class="tech-chip">ROS2</span>
+        <span class="tech-chip">C++</span>
+        <span class="tech-chip">Embedded Linux</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-emoji">💓</span>
+      <div class="proj-tag">Circuits & Signals · Dec 2025</div>
+      <div class="proj-title">Analog ECG Filter</div>
+      <p class="proj-desc">
+        Designed an analog-to-digital ECG acquisition pipeline for µV–mV bioelectric signals. 
+        Implemented AD627 instrumentation amplifier, cascaded active filters (0.1 Hz HPF + 22 Hz LPF), 
+        and MATLAB Parks–McClellan + QRS detection — producing clean waveforms at 84–120 BPM.
+      </p>
+      <div class="proj-tech">
+        <span class="tech-chip">Analog Design</span>
+        <span class="tech-chip">Op-Amps</span>
+        <span class="tech-chip">MATLAB</span>
+        <span class="tech-chip">NI DAQ</span>
+        <span class="tech-chip">Signal Processing</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-emoji">🕷️</span>
+      <div class="proj-tag">Embedded Design · Dec 2025</div>
+      <div class="proj-title">Spider Hexapod Robot</div>
+      <p class="proj-desc">
+        Designed FPGA-based PWM motor drivers and FSM control logic on a Cyclone V SoC, 
+        interfacing H-bridges and level shifters for an 18-servo hexapod. Implemented 
+        omnidirectional tripod gait sequencing via embedded Linux memory-mapped I/O with 
+        a layered C++ motion-control stack.
+      </p>
+      <div class="proj-tech">
+        <span class="tech-chip">Cyclone V FPGA</span>
+        <span class="tech-chip">SystemVerilog</span>
+        <span class="tech-chip">C++</span>
+        <span class="tech-chip">PWM</span>
+        <span class="tech-chip">Embedded Linux</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-emoji">🐝</span>
+      <div class="proj-tag">Interactive Exhibit · Apr 2025</div>
+      <div class="proj-title">Honeybee Sustainability Exhibit</div>
+      <p class="proj-desc">
+        Built an interactive educational game for elementary students using embedded C++ serial 
+        comms with Arduino-controlled LEDs, joystick, and SFML graphics. Achieved 100% recall 
+        of sustainability facts. Documented in a 200+ page engineering design report.
+      </p>
+      <div class="proj-tech">
+        <span class="tech-chip">Arduino</span>
+        <span class="tech-chip">C++</span>
+        <span class="tech-chip">SFML</span>
+        <span class="tech-chip">Serial Comms</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <span class="proj-emoji">🖼️</span>
+      <div class="proj-tag">Software · Dec 2024</div>
+      <div class="proj-title">Image Processing Application</div>
+      <p class="proj-desc">
+        Java Swing application with MVC architecture supporting BMP, JPG, PNG, and PPM formats. 
+        Implemented grayscale, sepia, brightness, sharpening, and real-time histogram visualization. 
+        Packaged as a JAR for efficient deployment.
+      </p>
+      <div class="proj-tech">
+        <span class="tech-chip">Java</span>
+        <span class="tech-chip">Swing MVC</span>
+        <span class="tech-chip">Image Processing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-label" style="justify-content:center">05 — Contact</div>
+  <div class="contact-inner">
+    <h2 class="section-title reveal" style="text-align:center">
+      Let's build something <em>together</em>
+    </h2>
+    <p class="contact-desc reveal">
+      Whether you're looking for a passionate ECE engineer for a co-op, internship, or research 
+      collaboration — or just want to talk circuits, robots, or bees — my inbox is open.
+    </p>
+    <div class="contact-links reveal">
+      <a href="mailto:snehachakrab@gmail.com" class="contact-link">
+        ✉ snehachakrab@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/snehachakrabarty/" target="_blank" class="contact-link">
+        ↗ LinkedIn
+      </a>
+      <a href="tel:5107553549" class="contact-link">
+        ☎ (510) 755-3549
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Sneha Chakrabarty</p>
+  <p>ECE @ Northeastern University · Boston, MA</p>
+  <p>Built with care ✦ and probably a soldering iron</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, .proj-card, .skill-card, .fact-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '56px';
+      ring.style.height = '56px';
+      ring.style.borderColor = 'var(--teal)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'var(--gold)';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings
+        const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+        let delay = 0;
+        siblings.forEach((s, idx) => { if (s === entry.target) delay = idx * 80; });
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
